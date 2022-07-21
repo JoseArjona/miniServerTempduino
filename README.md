@@ -17,7 +17,7 @@ codigo documentado ~  codigo creado con fines educativos
 4. Dentro de la carpeta clona el Repositorio `git clone https://github.com/JoseArjona/miniServerTempduino.git`
 5. Ejecuta XAMPP 
 6. Habilita los modulos de Apache y MYSQL
-7. accede al `localhost/Servidor/servidor.php`
-8. abre el PHP
+7. accede al `localhost/Servidor/server.php`
+8. abre el archivo php en el editor de codigo
 
 ***2022***
