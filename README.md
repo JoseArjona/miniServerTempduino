@@ -12,12 +12,18 @@ codigo documentado ~  codigo creado con fines educativos
 ## Instrucciones
 
 1. Dirgite a la carpeta de XAMMP (o equivalente)
-2. Busca la carpeta 'htdocs' en caso de XAMMP generalmente se encuentra en: `C:\xampp\htdocs`
+2. Busca la carpeta 'htdocs' en caso de XAMMP generalmente se encuentra en: 
+   ```sh   
+   C:\xampp\htdocs 
+   ```
 3. Crea una carpeta; suguerido 'Servidor'
-4. Dentro de la carpeta clona el Repositorio `git clone https://github.com/JoseArjona/miniServerTempduino.git`
+4. Dentro de la carpeta clona el Repositorio: 
+    ```sh 
+    git clone https://github.com/JoseArjona/miniServerTempduino.git 
+   ```
 5. Ejecuta XAMPP 
 6. Habilita los modulos de Apache y MYSQL
-7. accede al `localhost/Servidor/servidor.php`
-8. abre el PHP
+7. accede al :  http://localhost/Servidor/server.php/
+8. abre el archivo php en el editor de codigo
 
 ***2022***
