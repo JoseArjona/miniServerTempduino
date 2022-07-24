@@ -6,14 +6,17 @@ header("Access-Control-Allow-Methods: GET");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-/* 
+
+$temp = 0;
+$hum = 0;
+
 $temp = $_GET['temp'];
-$hum = $_GET['hum']; */
+$hum = $_GET['hum'];
 
 // refrescamos la pagina
 $page = $_SERVER['PHP_SELF'];
 $sec = "10";
-header("Refresh: $sec; url=$page");
+header("Refresh: $sec; url=$page?temp=0&hum=0");
 
 // obtenemos la fecha actual
 $fecha = date("Y-m-d");
@@ -32,10 +35,12 @@ function connectDB()
     return $con;
 }
 
-/* //incersion de datos
-$consulta = "INSERT INTO registro (fecha, temp, hum) VALUES ('$fecha', '$temp', '$hum')"
-    or die("Error en la consulta..");
- */
+if ($temp != 0 && $hum != 0) {
+    //incersion de datos
+    $consulta = "INSERT INTO registro (fecha, temp, hum) VALUES ('$fecha', '$temp', '$hum')"
+        or die("Error en la consulta..");
+    $resultado = mysqli_query(connectDB(), $consulta);
+}
 //sql
 $sql = "SELECT * FROM `registro`;";
 // Consulta datos y recepciona una clave para consultar dichos datos con dicha clave
