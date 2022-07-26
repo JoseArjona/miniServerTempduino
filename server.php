@@ -35,7 +35,7 @@ function connectDB()
     return $con;
 }
 
-if ($con) {
+if (connectDB()) {
     // echo "Conexion con base de datos exitosa! ";
 
     if (isset($_POST['temp'])) {
@@ -52,7 +52,7 @@ if ($con) {
 
         $consulta = "INSERT INTO registro(fecha, temp, hum) VALUES ('$fecha','$temp', '$hum')";
         // $consulta = "UPDATE DHT11 SET Temperatura='$temperatura',Humedad='$humedad' WHERE Id = 1";
-        $resultado = mysqli_query($con, $consulta);
+        $resultado = mysqli_query(connectDB(), $consulta);
         if ($resultado) {
             //  echo " Registo en base de datos OK! ";
         } else {
