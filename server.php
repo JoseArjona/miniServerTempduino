@@ -2,24 +2,24 @@
 // headers para poder optimizar la api para devolver archivos de tipo json y otras configuraciones del server
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: GET, POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-$temp = 0;
-$hum = 0;
+//$temp = 0;
+//$hum = 0;
 
-$temp = $_GET['temp'];
-$hum = $_GET['hum'];
+//$temp = $_GET['temp'];
+//$hum = $_GET['hum'];
 
 // refrescamos la pagina
 $page = $_SERVER['PHP_SELF'];
 $sec = "10";
-header("Refresh: $sec; url=$page?temp=0&hum=0");
+header("Refresh: $sec; url=$page");
 
 // obtenemos la fecha actual
-$fecha = date("Y-m-d");
+//$fecha = date("Y-m-d");
 
 // Conecta ala base de datos
 function connectDB()
@@ -35,12 +35,35 @@ function connectDB()
     return $con;
 }
 
-if ($temp != 0 && $hum != 0) {
-    //incersion de datos
-    $consulta = "INSERT INTO registro (fecha, temp, hum) VALUES ('$fecha', '$temp', '$hum')"
-        or die("Error en la consulta..");
-    $resultado = mysqli_query(connectDB(), $consulta);
+if ($con) {
+    // echo "Conexion con base de datos exitosa! ";
+
+    if (isset($_POST['temp'])) {
+        $temp = $_POST['temp'];
+        // echo "Estación meteorológica";
+        // echo " Temperaura : ".$temperatura;
+    }
+
+    if (isset($_POST['hum'])) {
+        $hum = $_POST['hum'];
+        //  echo " humedad : ".$humedad;
+        date_default_timezone_set('america/mexico_city');
+        $fecha = date("Y-m-d H:i:s");
+
+        $consulta = "INSERT INTO registro(fecha, temp, hum) VALUES ('$fecha','$temp', '$hum')";
+        // $consulta = "UPDATE DHT11 SET Temperatura='$temperatura',Humedad='$humedad' WHERE Id = 1";
+        $resultado = mysqli_query($con, $consulta);
+        if ($resultado) {
+            //  echo " Registo en base de datos OK! ";
+        } else {
+            //  echo " Falla! Registro BD";
+        }
+    }
+} else {
+    // echo "Falla! conexion con Base de datos ";   
 }
+
+
 //sql
 $sql = "SELECT * FROM `registro`;";
 // Consulta datos y recepciona una clave para consultar dichos datos con dicha clave
